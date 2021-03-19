@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pzh.mall.module.dao.OrderDao">
+    <insert id="saveOrder">
+        INSERT INTO oms_order(id, payment, post_fee, user_id, user_note) VALUES (#{id}, #{payment}, #{postFee}, #{userId}, #{userNote})
+    </insert>
+
+    <insert id="saveOrderItem">
+        INSERT INTO oms_order_item(item_id, order_id, num) VALUES (#{itemId}, #{orderId}, #{num})
+    </insert>
+
+    <select id="listSales" resultType="com.pzh.mall.module.domain.Sales">
+        SELECT t.item_id itemId, SUM(t.num) sales FROM oms_order_item t WHERE t.insert_time BETWEEN #{beginTime} AND #{endTime} GROUP BY t.item_id;
+    </select>
+</mapper>
