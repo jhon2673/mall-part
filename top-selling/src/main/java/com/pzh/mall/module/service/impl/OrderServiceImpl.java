@@ -15,10 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Description TODO
@@ -51,11 +48,11 @@ public class OrderServiceImpl implements OrderService {
                 orderDao.saveOrderItem(itemId, id, num);
 
                 // 更新redis销售量
-                Long index = redisTemplate.opsForZSet().reverseRank(key, id + "");
+                Long index = redisTemplate.opsForZSet().reverseRank(key, itemId);
                 if (index != null) {
-                    redisTemplate.opsForZSet().incrementScore(key, itemId + "", num);
+                    redisTemplate.opsForZSet().incrementScore(key, itemId, num);
                 } else {
-                    redisTemplate.opsForZSet().add(key, itemId + "", num);
+                    redisTemplate.opsForZSet().add(key, itemId, num);
                 }
             }
         }

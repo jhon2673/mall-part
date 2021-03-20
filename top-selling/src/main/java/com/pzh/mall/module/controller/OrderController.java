@@ -80,6 +80,7 @@ public class OrderController {
         try {
             List<Rank> rankList = orderService.getRankList(days);
             resultMsg.setData(rankList);
+            resultMsg.setCount((long) rankList.size());
         } catch (Exception e) {
             e.printStackTrace();
             resultMsg.setCode(-1);
