@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pzh.mall.module.dao.UserDao">
+
+    <resultMap type="com.pzh.mall.module.domain.User" id="User">
+        <id column="id" property="id" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        <id column="user_name" property="userName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="password" property="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="icon" property="icon" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="email" property="email" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="nick_name" property="nickName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="note" property="note" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="last_login_time" property="lastLoginTime" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="create_time" property="createTime" javaType="java.util.Date" jdbcType="DATE"/>
+        <id column="status" property="status" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <select id="findByUserName" resultMap="User">
+        SELECT * FROM ums_user t WHERE t.user_name = #{userName}
+    </select>
+
+    <select id="list" resultMap="User">
+        SELECT * FROM ums_user t
+    </select>
+
+    <insert id="add" parameterType="com.pzh.mall.module.domain.User">
+        INSERT INTO ums_user (user_name, PASSWORD, icon, email, nick_name, note) VALUES (#{userName}, #{PASSWORD}, #{icon}, #{email}, #{nickName}, #{note})
+    </insert>
+
+    <delete id="delete">
+        DELETE ums_user t WHERE t.id = #{id};
+    </delete>
+</mapper>
