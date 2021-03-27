@@ -11,6 +11,7 @@
     <modules>
         <module>top-selling</module>
         <module>user-authentication</module>
+        <module>order-delay</module>
     </modules>
 
     <parent>
@@ -117,6 +118,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- rabbitmq -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
     </dependencies>
 
